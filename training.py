@@ -3,11 +3,16 @@ import json
 import pickle
 import numpy as np 
 import nltk
+import tensorflow as tf 
+
+nltk.download('punkt')
+nltk.download('wordnet')
 
 from keras.models import Sequential
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 from keras.layers import Dense, Activation, Dropout
-from keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD
 
 lemmatizer = WordNetLemmatizer()
 
@@ -49,7 +54,7 @@ for document in documents:
     output_row[classes.index(document[1])] = 1
     training.append([bag, output_row]) 
 random.shuffle(training) 
-training = np.array(training) 
+training = np.array(training, dtype=object) 
   
 # splitting the data 
 train_x = list(training[:, 0]) 
@@ -65,7 +70,7 @@ model.add(Dense(len(train_y[0]),
                 activation='softmax')) 
   
 # compiling the model 
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True) 
+sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', 
               optimizer=sgd, metrics=['accuracy']) 
 hist = model.fit(np.array(train_x), np.array(train_y), 

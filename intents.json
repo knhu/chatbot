@@ -13,6 +13,6 @@
 
     {"tag": "age",
      "patterns": ["What's your age?", "How old are you?", "age?"],
-     "response": ["My own is 25!", "My owner is 25 years old!"]
+     "responses": ["My own is 25!", "My owner is 25 years old!"]
     }
 ]}
