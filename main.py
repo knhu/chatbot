@@ -8,6 +8,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from nltk.stem import WordNetLemmatizer
 
+
 lemmatizer = WordNetLemmatizer()
 
 intents = json.loads(open('intents.json').read())
@@ -52,9 +53,11 @@ def get_response(intents_list, intents_json):
             result = random.choice(i['responses']) 
             break
     return result 
+
   
 print("Chatbot is up!") 
-  
+
+
 while True: 
     message = input("") 
     ints = predict_class(message) 
